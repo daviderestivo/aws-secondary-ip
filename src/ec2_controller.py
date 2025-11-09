@@ -124,6 +124,10 @@ def update_routes(old_instance_id, new_instance_id, destination_cidr):
     """Update static routes from old to new instance"""
     ec2 = boto3.client('ec2')
 
+    # Ensure destination_cidr is a proper CIDR block
+    if '/' not in destination_cidr:
+        destination_cidr = f"{destination_cidr}/32"
+
     # Get route tables - use new instance's subnet if old doesn't exist
     old_info = get_instance_info(old_instance_id)
     if old_info:
