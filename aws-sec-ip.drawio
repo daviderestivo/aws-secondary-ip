@@ -1,137 +1,146 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.2.8 Chrome/140.0.7339.240 Electron/38.4.0 Safari/537.36" version="28.2.8" pages="3">
   <diagram id="2HfbEsXbpUauhGwDT86A" name="HLD">
-    <mxGraphModel dx="2082" dy="1548" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="2498" dy="1858" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="e4_K1hAhCYwUkDuNt9MX-3" value="" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" parent="1" vertex="1">
-          <mxGeometry x="40" y="30" width="320" height="430" as="geometry" />
+          <mxGeometry x="400" y="30" width="320" height="430" as="geometry" />
         </mxCell>
         <mxCell id="e4_K1hAhCYwUkDuNt9MX-4" value="" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
-          <mxGeometry x="360" y="30" width="320" height="430" as="geometry" />
+          <mxGeometry x="720" y="30" width="320" height="430" as="geometry" />
         </mxCell>
         <mxCell id="e4_K1hAhCYwUkDuNt9MX-5" value="" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
-          <mxGeometry x="680" y="30" width="320" height="430" as="geometry" />
+          <mxGeometry x="1040" y="30" width="320" height="430" as="geometry" />
         </mxCell>
-        <mxCell id="e4_K1hAhCYwUkDuNt9MX-6" value="" style="endArrow=none;html=1;rounded=0;" parent="1" edge="1" source="-U57x_bcir1Dt_qUdBMZ-9">
+        <mxCell id="e4_K1hAhCYwUkDuNt9MX-6" value="" style="endArrow=none;html=1;rounded=0;" parent="1" source="-U57x_bcir1Dt_qUdBMZ-9" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="75" y="330" as="sourcePoint" />
-            <mxPoint x="325" y="330" as="targetPoint" />
+            <mxPoint x="435" y="330" as="sourcePoint" />
+            <mxPoint x="685" y="330" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="e4_K1hAhCYwUkDuNt9MX-7" value="" style="endArrow=none;html=1;rounded=0;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="395" y="330" as="sourcePoint" />
-            <mxPoint x="645" y="330" as="targetPoint" />
+            <mxPoint x="755" y="330" as="sourcePoint" />
+            <mxPoint x="1005" y="330" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="e4_K1hAhCYwUkDuNt9MX-8" value="" style="endArrow=none;html=1;rounded=0;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="720" y="330" as="sourcePoint" />
-            <mxPoint x="970" y="330" as="targetPoint" />
+            <mxPoint x="1080" y="330" as="sourcePoint" />
+            <mxPoint x="1330" y="330" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="-U57x_bcir1Dt_qUdBMZ-2" value="sec-ip-vip-85483" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
-          <mxGeometry x="460" y="380" width="120" height="60" as="geometry" />
+          <mxGeometry x="820" y="380" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="-U57x_bcir1Dt_qUdBMZ-3" value="" style="endArrow=none;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" parent="1" source="-U57x_bcir1Dt_qUdBMZ-2" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="540" y="380" as="sourcePoint" />
-            <mxPoint x="520" y="220" as="targetPoint" />
+            <mxPoint x="900" y="380" as="sourcePoint" />
+            <mxPoint x="880" y="220" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Thgg8DQu76LsUYoqpeeL-9" value="eth0" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="-U57x_bcir1Dt_qUdBMZ-3">
+        <mxCell id="Thgg8DQu76LsUYoqpeeL-9" value="eth0" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="-U57x_bcir1Dt_qUdBMZ-3" vertex="1" connectable="0">
           <mxGeometry x="-0.8" y="-2" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="-U57x_bcir1Dt_qUdBMZ-4" value="sec-ip-cl" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
-          <mxGeometry x="780" y="380" width="120" height="60" as="geometry" />
+          <mxGeometry x="1140" y="380" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="-U57x_bcir1Dt_qUdBMZ-5" value="&lt;span&gt;eth0&amp;nbsp;&lt;/span&gt;" style="endArrow=none;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" parent="1" source="-U57x_bcir1Dt_qUdBMZ-4" edge="1">
           <mxGeometry x="-0.7647" width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="860" y="380" as="sourcePoint" />
-            <mxPoint x="840" y="210" as="targetPoint" />
+            <mxPoint x="1220" y="380" as="sourcePoint" />
+            <mxPoint x="1200" y="210" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="840" y="360" />
+              <mxPoint x="1200" y="360" />
             </Array>
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="-U57x_bcir1Dt_qUdBMZ-6" value="&lt;span style=&quot;caret-color: rgb(15, 20, 26); color: rgb(15, 20, 26); font-family: &amp;quot;Amazon Ember&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Roboto, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: nowrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: none; float: none; display: inline !important;&quot;&gt;172.31.16.10/20&lt;/span&gt;" style="text;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="720" y="305" width="100" height="30" as="geometry" />
+          <mxGeometry x="1080" y="305" width="100" height="30" as="geometry" />
         </mxCell>
         <mxCell id="-U57x_bcir1Dt_qUdBMZ-7" value="&lt;span style=&quot;caret-color: rgb(15, 20, 26); color: rgb(15, 20, 26); font-family: &amp;quot;Amazon Ember&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Roboto, Arial, sans-serif; font-size: 14px; text-wrap-mode: nowrap;&quot;&gt;172.31.32.15/20&lt;/span&gt;" style="text;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="400" y="300" width="100" height="30" as="geometry" />
+          <mxGeometry x="760" y="300" width="100" height="30" as="geometry" />
         </mxCell>
         <mxCell id="-U57x_bcir1Dt_qUdBMZ-10" value="AZ3" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontStyle=1" parent="1" vertex="1">
-          <mxGeometry x="810" y="40" width="60" height="30" as="geometry" />
+          <mxGeometry x="1170" y="40" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="-U57x_bcir1Dt_qUdBMZ-11" value="AZ2" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontStyle=1" parent="1" vertex="1">
-          <mxGeometry x="480" y="40" width="60" height="30" as="geometry" />
+          <mxGeometry x="840" y="40" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="-U57x_bcir1Dt_qUdBMZ-12" value="AZ1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontStyle=1" parent="1" vertex="1">
-          <mxGeometry x="170" y="40" width="60" height="30" as="geometry" />
+          <mxGeometry x="530" y="40" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="-U57x_bcir1Dt_qUdBMZ-13" value="Monitoring Machine" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fontColor=#000000;darkOpacity=0.05;fillColor=#FFF9B2;strokeColor=none;fillStyle=solid;direction=west;gradientDirection=north;gradientColor=#FFF2A1;shadow=1;size=20;pointerEvents=1;" parent="1" vertex="1">
-          <mxGeometry x="870" y="420" width="140" height="60" as="geometry" />
+          <mxGeometry x="1230" y="420" width="140" height="60" as="geometry" />
         </mxCell>
         <mxCell id="-U57x_bcir1Dt_qUdBMZ-14" value="Monitored Machine" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fontColor=#000000;darkOpacity=0.05;fillColor=#FFF9B2;strokeColor=none;fillStyle=solid;direction=west;gradientDirection=north;gradientColor=#FFF2A1;shadow=1;size=20;pointerEvents=1;" parent="1" vertex="1">
-          <mxGeometry x="540" y="430" width="140" height="60" as="geometry" />
+          <mxGeometry x="900" y="430" width="140" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="-U57x_bcir1Dt_qUdBMZ-16" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.25;exitY=0;exitDx=0;exitDy=0;" parent="1" source="-U57x_bcir1Dt_qUdBMZ-17" target="-U57x_bcir1Dt_qUdBMZ-2" edge="1">
+        <mxCell id="-U57x_bcir1Dt_qUdBMZ-16" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.75;exitY=0;exitDx=0;exitDy=0;" parent="1" source="-U57x_bcir1Dt_qUdBMZ-17" target="-U57x_bcir1Dt_qUdBMZ-2" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="270" y="600" as="sourcePoint" />
-            <mxPoint x="510" y="370" as="targetPoint" />
+            <mxPoint x="630" y="600" as="sourcePoint" />
+            <mxPoint x="870" y="370" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="-U57x_bcir1Dt_qUdBMZ-17" value="&lt;div&gt;[ec2-user@ip-172-31-82-204 ~]$ ip addr&lt;/div&gt;&lt;div&gt;1: lo: &amp;lt;LOOPBACK,UP,LOWER_UP&amp;gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; inet 127.0.0.1/8 scope host lo&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;valid_lft forever preferred_lft forever&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; inet6 ::1/128 scope host&amp;nbsp;&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;valid_lft forever preferred_lft forever&lt;/div&gt;&lt;div&gt;2: eth0: &amp;lt;BROADCAST,MULTICAST,UP,LOWER_UP&amp;gt; mtu 9001 qdisc mq state UP group default qlen 1000&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; link/ether 12:35:ed:8d:26:cb brd ff:ff:ff:ff:ff:ff&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; inet 172.31.82.204/20 brd 172.31.95.255 scope global dynamic eth0&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;valid_lft 3322sec preferred_lft 3322sec&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; inet 10.0.0.10/24 scope global eth0&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;valid_lft forever preferred_lft forever&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; inet6 fe80::1035:edff:fe8d:26cb/64 scope link&amp;nbsp;&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;valid_lft forever preferred_lft forever&lt;/div&gt;&lt;div&gt;[ec2-user@ip-172-31-82-204 ~]$ ip rule&amp;nbsp;&lt;/div&gt;&lt;div&gt;0:&amp;nbsp; &amp;nbsp; &amp;nbsp; from all lookup local&lt;/div&gt;&lt;div&gt;32765:&amp;nbsp; from all to 10.0.0.0/24 lookup secondary&lt;/div&gt;&lt;div&gt;32766:&amp;nbsp; from all lookup main&lt;/div&gt;&lt;div&gt;32767:&amp;nbsp; from all lookup default&lt;/div&gt;&lt;div&gt;[ec2-user@ip-172-31-82-204 ~]$ ip route show table secondary&lt;/div&gt;&lt;div&gt;default via 172.31.80.1 dev eth0 src 10.0.0.10&amp;nbsp;&lt;/div&gt;&lt;div&gt;[ec2-user@ip-172-31-82-204 ~]$ ip route&lt;/div&gt;&lt;div&gt;default via 172.31.80.1 dev eth0&amp;nbsp;&lt;/div&gt;&lt;div&gt;10.0.0.0/24 dev eth0 proto kernel scope link src 10.0.0.10&amp;nbsp;&lt;/div&gt;&lt;div&gt;169.254.169.254 dev eth0&amp;nbsp;&lt;/div&gt;&lt;div&gt;172.31.80.0/20 dev eth0 proto kernel scope link src 172.31.82.204&amp;nbsp;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;arcSize=2;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" parent="1" vertex="1">
-          <mxGeometry x="50" y="590" width="865" height="430" as="geometry" />
+        <mxCell id="-U57x_bcir1Dt_qUdBMZ-17" value="&lt;div&gt;&lt;b&gt;[ec2-user@ip-172-31-82-204 ~]$ ip addr&lt;/b&gt;&lt;/div&gt;&lt;div&gt;1: lo: &amp;lt;LOOPBACK,UP,LOWER_UP&amp;gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; inet 127.0.0.1/8 scope host lo&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;valid_lft forever preferred_lft forever&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; inet6 ::1/128 scope host&amp;nbsp;&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;valid_lft forever preferred_lft forever&lt;/div&gt;&lt;div&gt;2: eth0: &amp;lt;BROADCAST,MULTICAST,UP,LOWER_UP&amp;gt; mtu 9001 qdisc mq state UP group default qlen 1000&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; link/ether 12:35:ed:8d:26:cb brd ff:ff:ff:ff:ff:ff&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; inet 172.31.82.204/20 brd 172.31.95.255 scope global dynamic eth0&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;valid_lft 3322sec preferred_lft 3322sec&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; inet 10.0.0.10/24 scope global eth0&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;valid_lft forever preferred_lft forever&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; inet6 fe80::1035:edff:fe8d:26cb/64 scope link&amp;nbsp;&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;valid_lft forever preferred_lft forever&lt;/div&gt;&lt;div&gt;&lt;b&gt;[ec2-user@ip-172-31-82-204 ~]$ ip rule&amp;nbsp;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;0:&amp;nbsp; &amp;nbsp; &amp;nbsp; from all lookup local&lt;/div&gt;&lt;div&gt;32765:&amp;nbsp; from all to 10.0.0.0/24 lookup secondary&lt;/div&gt;&lt;div&gt;32766:&amp;nbsp; from all lookup main&lt;/div&gt;&lt;div&gt;32767:&amp;nbsp; from all lookup default&lt;/div&gt;&lt;div&gt;&lt;b&gt;[ec2-user@ip-172-31-82-204 ~]$ ip route show table secondary&lt;/b&gt;&lt;/div&gt;&lt;div&gt;default via 172.31.80.1 dev eth0 src 10.0.0.10&amp;nbsp;&lt;/div&gt;&lt;div&gt;&lt;b&gt;[ec2-user@ip-172-31-82-204 ~]$ ip route&lt;/b&gt;&lt;/div&gt;&lt;div&gt;default via 172.31.80.1 dev eth0&amp;nbsp;&lt;/div&gt;&lt;div&gt;10.0.0.0/24 dev eth0 proto kernel scope link src 10.0.0.10&amp;nbsp;&lt;/div&gt;&lt;div&gt;169.254.169.254 dev eth0&amp;nbsp;&lt;/div&gt;&lt;div&gt;172.31.80.0/20 dev eth0 proto kernel scope link src 172.31.82.204&amp;nbsp;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;arcSize=2;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" parent="1" vertex="1">
+          <mxGeometry x="70" y="580" width="865" height="430" as="geometry" />
         </mxCell>
         <mxCell id="-U57x_bcir1Dt_qUdBMZ-18" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#b85450;strokeWidth=2;" parent="1" vertex="1">
-          <mxGeometry x="84" y="767" width="75" height="20" as="geometry" />
+          <mxGeometry x="104" y="757" width="75" height="20" as="geometry" />
         </mxCell>
         <mxCell id="-U57x_bcir1Dt_qUdBMZ-19" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#b85450;strokeWidth=2;" parent="1" vertex="1">
-          <mxGeometry x="50" y="852" width="270" height="20" as="geometry" />
+          <mxGeometry x="70" y="842" width="270" height="20" as="geometry" />
         </mxCell>
         <mxCell id="-U57x_bcir1Dt_qUdBMZ-20" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#b85450;strokeWidth=2;" parent="1" vertex="1">
-          <mxGeometry x="50" y="910" width="270" height="20" as="geometry" />
+          <mxGeometry x="70" y="900" width="270" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="Thgg8DQu76LsUYoqpeeL-1" value="" style="endArrow=none;html=1;rounded=0;entryX=0.688;entryY=0.767;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.219;exitY=0.767;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1">
+        <mxCell id="Thgg8DQu76LsUYoqpeeL-1" value="" style="endArrow=none;html=1;rounded=0;entryX=0.688;entryY=0.767;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.219;exitY=0.767;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="129.99999999999991" y="209.99999999999994" as="sourcePoint" />
-            <mxPoint x="920.0799999999998" y="209.99999999999994" as="targetPoint" />
+            <mxPoint x="489.9999999999999" y="209.99999999999994" as="sourcePoint" />
+            <mxPoint x="1280.08" y="209.99999999999994" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Thgg8DQu76LsUYoqpeeL-2" value="Secondary network 10.0.0.0/24" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="Thgg8DQu76LsUYoqpeeL-1">
+        <mxCell id="Thgg8DQu76LsUYoqpeeL-2" value="Secondary network 10.0.0.0/24" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="Thgg8DQu76LsUYoqpeeL-1" vertex="1" connectable="0">
           <mxGeometry x="-0.2658" y="-1" relative="1" as="geometry">
             <mxPoint x="85" y="1" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Thgg8DQu76LsUYoqpeeL-5" value="10.0.0.100" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="850" y="220" width="60" height="30" as="geometry" />
+        <mxCell id="Thgg8DQu76LsUYoqpeeL-5" value="10.0.0.100" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="1210" y="220" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="Thgg8DQu76LsUYoqpeeL-6" value="10.0.0.11" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="530" y="220" width="60" height="30" as="geometry" />
+        <mxCell id="Thgg8DQu76LsUYoqpeeL-6" value="10.0.0.11" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="890" y="220" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="Thgg8DQu76LsUYoqpeeL-10" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" target="-U57x_bcir1Dt_qUdBMZ-9">
+        <mxCell id="Thgg8DQu76LsUYoqpeeL-10" value="" style="endArrow=none;html=1;rounded=0;" parent="1" target="-U57x_bcir1Dt_qUdBMZ-9" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="75" y="330" as="sourcePoint" />
-            <mxPoint x="325" y="330" as="targetPoint" />
+            <mxPoint x="435" y="330" as="sourcePoint" />
+            <mxPoint x="685" y="330" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="-U57x_bcir1Dt_qUdBMZ-9" value="&lt;span style=&quot;caret-color: rgb(15, 20, 26); color: rgb(15, 20, 26); font-family: &amp;quot;Amazon Ember&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Roboto, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: nowrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: none; float: none; display: inline !important;&quot;&gt;172.31.48.0/20&lt;/span&gt;" style="text;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="135" y="310" width="130" height="40" as="geometry" />
+          <mxGeometry x="495" y="310" width="130" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="Thgg8DQu76LsUYoqpeeL-11" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;fillColor=#f5f5f5;strokeColor=#666666;width=9;endSize=7;" edge="1" parent="1">
+        <mxCell id="Thgg8DQu76LsUYoqpeeL-11" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;fillColor=#f5f5f5;strokeColor=#666666;width=9;endSize=7;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="840" y="234.5" as="sourcePoint" />
-            <mxPoint x="590" y="234.5" as="targetPoint" />
+            <mxPoint x="1200" y="234.5" as="sourcePoint" />
+            <mxPoint x="950" y="234.5" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Thgg8DQu76LsUYoqpeeL-12" value="&lt;span&gt;Monitor ... via ping&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="Thgg8DQu76LsUYoqpeeL-11">
+        <mxCell id="Thgg8DQu76LsUYoqpeeL-12" value="&lt;span&gt;Monitor ... via ping&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="Thgg8DQu76LsUYoqpeeL-11" vertex="1" connectable="0">
           <mxGeometry x="-0.112" y="2" relative="1" as="geometry">
             <mxPoint x="-9" y="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NLIaxyIw9tCeHythqEeO-3" value="&lt;div&gt;&lt;b&gt;[root@sec-ip-cl src]# ip addr&lt;/b&gt;&lt;/div&gt;&lt;div&gt;1: lo: &amp;lt;LOOPBACK,UP,LOWER_UP&amp;gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; inet 127.0.0.1/8 scope host lo&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;valid_lft forever preferred_lft forever&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; inet6 ::1/128 scope host noprefixroute&amp;nbsp;&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;valid_lft forever preferred_lft forever&lt;/div&gt;&lt;div&gt;2: enX0: &amp;lt;BROADCAST,MULTICAST,UP,LOWER_UP&amp;gt; mtu 9001 qdisc fq_codel state UP group default qlen 1000&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; link/ether 0a:ff:c0:a7:d0:e5 brd ff:ff:ff:ff:ff:ff&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; altname eni-0c312ae366b69dc3e&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; altname device-number-0.0&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; inet 172.31.22.88/20 metric 512 brd 172.31.31.255 scope global dynamic enX0&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;valid_lft 3287sec preferred_lft 3287sec&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; inet 10.0.0.100/24 scope global enX0&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;valid_lft forever preferred_lft forever&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; inet6 fe80::8ff:c0ff:fea7:d0e5/64 scope link proto kernel_ll&amp;nbsp;&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;valid_lft forever preferred_lft forever&lt;/div&gt;&lt;div&gt;&lt;b&gt;[root@sec-ip-cl src]# ip rule&amp;nbsp;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;0:&amp;nbsp; &amp;nbsp; &amp;nbsp; from all lookup local&lt;/div&gt;&lt;div&gt;32765:&amp;nbsp; from all to 10.0.0.0/24 lookup secondary&lt;/div&gt;&lt;div&gt;32766:&amp;nbsp; from all lookup main&lt;/div&gt;&lt;div&gt;32767:&amp;nbsp; from all lookup default&lt;/div&gt;&lt;div&gt;&lt;b&gt;[root@sec-ip-cl src]# ip route show table secondary&lt;/b&gt;&lt;/div&gt;&lt;div&gt;default via 172.31.16.1 dev enX0 src 10.0.0.100&amp;nbsp;&lt;/div&gt;&lt;div&gt;&lt;b&gt;[root@sec-ip-cl src]# ip route&lt;/b&gt;&lt;/div&gt;&lt;div&gt;default via 172.31.16.1 dev enX0 proto dhcp src 172.31.22.88 metric 512&amp;nbsp;&lt;/div&gt;&lt;div&gt;10.0.0.0/24 dev enX0 proto kernel scope link src 10.0.0.100&amp;nbsp;&lt;/div&gt;&lt;div&gt;172.31.0.2 via 172.31.16.1 dev enX0 proto dhcp src 172.31.22.88 metric 512&amp;nbsp;&lt;/div&gt;&lt;div&gt;172.31.16.0/20 dev enX0 proto kernel scope link src 172.31.22.88 metric 512&amp;nbsp;&lt;/div&gt;&lt;div&gt;172.31.16.1 dev enX0 proto dhcp scope link src 172.31.22.88 metric 512&amp;nbsp;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;arcSize=2;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="570" width="865" height="430" as="geometry" />
+        </mxCell>
+        <mxCell id="NLIaxyIw9tCeHythqEeO-5" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.25;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="NLIaxyIw9tCeHythqEeO-3" target="-U57x_bcir1Dt_qUdBMZ-4">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="820" y="630" as="sourcePoint" />
+            <mxPoint x="981" y="490" as="targetPoint" />
           </mxGeometry>
         </mxCell>
       </root>

@@ -10,6 +10,8 @@ secondary IP addresses across availability zones. It monitors an
 instance's health via ping and automatically launches replacement
 instances when failures are detected.
 
+[[file:./img/aws-sec-ip-HLD.jpg]]
+
 * How It Works
 
 1. *Health Check*: Verifies instance state (running) and network reachability (ping)
