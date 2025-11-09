@@ -14,26 +14,35 @@ warnings.filterwarnings("ignore", category=DeprecationWarning, module="boto3")
 warnings.filterwarnings("ignore", category=DeprecationWarning, module="botocore")
 warnings.filterwarnings("ignore", message=".*Boto3 will no longer support Python.*")
 
+DEBUG = False
+
+def debug_print(message):
+    if DEBUG:
+        print(f"  DEBUG: {message}")
+
+def info_print(message):
+    print(message)
+
 def ping_instance(ip):
     """Ping instance and return True if reachable"""
     try:
-        print(f"  DEBUG: Starting ping to {ip}...")
+        debug_print(f"Starting ping to {ip}...")
         result = subprocess.run(['ping', '-c', '1', '-W', '2', ip],
                               capture_output=True, text=True, timeout=5)
-        print(f"  DEBUG: Ping completed with return code: {result.returncode}")
-        print(f"  DEBUG: Ping stdout: {result.stdout}")
-        print(f"  DEBUG: Ping stderr: {result.stderr}")
+        debug_print(f"Ping completed with return code: {result.returncode}")
+        debug_print(f"Ping stdout: {result.stdout}")
+        debug_print(f"Ping stderr: {result.stderr}")
         if result.returncode == 0:
-            print(f"  PING {ip}: SUCCESS")
+            debug_print(f"PING {ip}: SUCCESS")
             return True
         else:
-            print(f"  PING {ip}: FAILED")
+            info_print(f"  PING {ip}: FAILED")
             return False
     except subprocess.TimeoutExpired:
-        print(f"  PING {ip}: TIMEOUT")
+        info_print(f"  PING {ip}: TIMEOUT")
         return False
     except Exception as e:
-        print(f"  PING {ip}: ERROR - {e}")
+        info_print(f"  PING {ip}: ERROR - {e}")
         return False
 
 def get_instance_info(instance_id):
@@ -46,7 +55,7 @@ def get_instance_info(instance_id):
     )
     ec2 = boto3.client('ec2', config=config)
     try:
-        print(f"  DEBUG: Checking instance {instance_id}...")
+        debug_print(f"Checking instance {instance_id}...")
         response = ec2.describe_instances(InstanceIds=[instance_id])
         instance = response['Reservations'][0]['Instances'][0]
 
@@ -59,7 +68,7 @@ def get_instance_info(instance_id):
             'subnet_id': instance['SubnetId']
         }
     except Exception as e:
-        print(f"  DEBUG: Error getting instance info: {e}")
+        debug_print(f"Error getting instance info: {e}")
         return None
 
 def get_subnet_gateway(subnet_id):
@@ -133,7 +142,7 @@ def update_routes(old_instance_id, new_instance_id, destination_cidr):
                 RouteTableId=rt_id,
                 DestinationCidrBlock=destination_cidr
             )
-            print(f"Deleted route {destination_cidr} from route table {rt_id}")
+            info_print(f"Deleted route {destination_cidr} from route table {rt_id}")
         except:
             pass  # Route might not exist
 
@@ -144,9 +153,9 @@ def update_routes(old_instance_id, new_instance_id, destination_cidr):
                 DestinationCidrBlock=destination_cidr,
                 InstanceId=new_instance_id
             )
-            print(f"Added route {destination_cidr} -> {new_instance_id} in route table {rt_id}")
+            info_print(f"Added route {destination_cidr} -> {new_instance_id} in route table {rt_id}")
         except Exception as e:
-            print(f"Failed to add route in {rt_id}: {e}")
+            info_print(f"Failed to add route in {rt_id}: {e}")
 
 def render_user_data(template_file, az_subnet_gateway, route_destination):
     """Render Jinja2 template with variables"""
@@ -219,33 +228,36 @@ def launch_instance_in_az(instance_info, target_az, security_group, keypair, use
     return new_instance_id
 
 def main():
+    global DEBUG
     parser = argparse.ArgumentParser(description='EC2 Controller - Monitor and failover instances')
     parser.add_argument('--instance-id', required=True, help='Controlled instance ID')
     parser.add_argument('--security-group', required=True, help='Security group ID for new instance')
     parser.add_argument('--keypair', required=True, help='Key pair name for new instance')
     parser.add_argument('--user-data-file', required=True, help='Path to Jinja2 user data template file')
     parser.add_argument('--route-destination', required=True, help='Destination CIDR for static route (e.g., 10.0.0.0/16)')
+    parser.add_argument('--debug', action='store_true', help='Enable debug output')
 
     args = parser.parse_args()
+    DEBUG = args.debug
 
     try:
         current_instance_id = args.instance_id
 
-        print(f"Starting continuous monitoring of instance {current_instance_id}")
-        print("Press Ctrl+C to stop")
+        info_print(f"Starting continuous monitoring of instance {current_instance_id}")
+        info_print("Press Ctrl+C to stop")
 
         while True:
-            print(f"DEBUG: Starting monitoring cycle...")
+            debug_print("Starting monitoring cycle...")
             timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            print(f"DEBUG: Timestamp: {timestamp}")
+            debug_print(f"Timestamp: {timestamp}")
 
             # Get instance info
-            print(f"DEBUG: Getting instance info...")
+            debug_print("Getting instance info...")
             info = get_instance_info(current_instance_id)
-            print(f"DEBUG: Instance info result: {info}")
+            debug_print(f"Instance info result: {info}")
 
             # Check if instance needs replacement
-            print(f"DEBUG: Checking replacement logic...")
+            debug_print("Checking replacement logic...")
             needs_replacement = False
             reason = ""
             ping_reachable = False
@@ -253,35 +265,35 @@ def main():
             if not info:
                 needs_replacement = True
                 reason = "not found"
-                print(f"DEBUG: Instance not found")
+                debug_print("Instance not found")
             elif info['state'] != 'running':
                 needs_replacement = True
                 reason = f"state is {info['state']}"
-                print(f"DEBUG: Instance state: {info['state']}")
+                debug_print(f"Instance state: {info['state']}")
             else:
-                print(f"DEBUG: Instance running, checking ping...")
+                debug_print("Instance running, checking ping...")
                 # Extract IP from route destination CIDR (e.g., 10.0.0.10/32 -> 10.0.0.10)
                 route_ip = args.route_destination.split('/')[0]
                 ping_reachable = ping_instance(route_ip)
                 if not ping_reachable:
                     needs_replacement = True
                     reason = "unreachable"
-                print(f"DEBUG: Ping result: {ping_reachable}")
+                debug_print(f"Ping result: {ping_reachable}")
 
-            print(f"DEBUG: Needs replacement: {needs_replacement}, Reason: {reason}")
+            debug_print(f"Needs replacement: {needs_replacement}, Reason: {reason}")
 
             # Always print current status
             if not info:
-                print(f"[{timestamp}] Instance {current_instance_id} - NOT FOUND")
+                info_print(f"[{timestamp}] Instance {current_instance_id} - NOT FOUND")
             elif info['state'] != 'running':
-                print(f"[{timestamp}] Instance {current_instance_id} - STATE: {info['state']}")
+                info_print(f"[{timestamp}] Instance {current_instance_id} - STATE: {info['state']}")
             else:
                 ping_status = "REACHABLE" if ping_reachable else "UNREACHABLE"
-                print(f"[{timestamp}] Instance {current_instance_id} ({info['ip']}) in AZ {info['az']} - RUNNING, PING: {ping_status}")
+                info_print(f"[{timestamp}] Instance {current_instance_id} ({info['ip']}) in AZ {info['az']} - RUNNING, PING: {ping_status}")
 
-            print(f"DEBUG: About to check replacement logic...")
+            debug_print("About to check replacement logic...")
             if needs_replacement:
-                print(f"[{timestamp}] Launching replacement due to: {reason}")
+                info_print(f"[{timestamp}] Launching replacement due to: {reason}")
 
                 # Use last known info or get from any available AZ
                 if not info:
@@ -292,7 +304,7 @@ def main():
                     # Get any subnet in that AZ for VPC discovery
                     subnets = ec2.describe_subnets(Filters=[{'Name': 'availability-zone', 'Values': [target_az]}])
                     if not subnets['Subnets']:
-                        print("No subnets available, retrying in 5 seconds...")
+                        info_print("No subnets available, retrying in 5 seconds...")
                         time.sleep(5)
                         continue
                     # Create minimal info for launch
@@ -305,49 +317,49 @@ def main():
 
                 other_azs = get_other_azs(info['az'])
                 if not other_azs:
-                    print("No other AZs available, retrying in 5 seconds...")
+                    info_print("No other AZs available, retrying in 5 seconds...")
                     time.sleep(5)
                     continue
 
                 target_az = other_azs[0]
-                print(f"Launching new instance in AZ: {target_az}")
+                info_print(f"Launching new instance in AZ: {target_az}")
 
                 new_instance_id = launch_instance_in_az(info, target_az, args.security_group, args.keypair, args.user_data_file, args.route_destination)
-                print(f"New instance {new_instance_id} launched")
+                info_print(f"New instance {new_instance_id} launched")
 
                 # Wait for status checks to pass
-                print("Waiting for instance status checks to pass...")
+                info_print("Waiting for instance status checks to pass...")
                 ec2 = boto3.client('ec2')
                 waiter = ec2.get_waiter('instance_status_ok')
                 waiter.wait(InstanceIds=[new_instance_id])
-                print("Instance status checks passed")
+                info_print("Instance status checks passed")
 
                 # Wait for user data script to complete (configure secondary IP)
-                print("Waiting 30 seconds for user data script to configure secondary IP...")
+                info_print("Waiting 30 seconds for user data script to configure secondary IP...")
                 time.sleep(30)
 
                 # Update routes
-                print("Updating static routes...")
+                info_print("Updating static routes...")
                 update_routes(current_instance_id, new_instance_id, args.route_destination)
 
                 # Terminate old instance if it exists
                 try:
                     ec2 = boto3.client('ec2')
                     ec2.terminate_instances(InstanceIds=[current_instance_id])
-                    print(f"Old instance {current_instance_id} terminated")
+                    info_print(f"Old instance {current_instance_id} terminated")
                 except:
-                    print(f"Could not terminate old instance {current_instance_id}")
+                    info_print(f"Could not terminate old instance {current_instance_id}")
 
                 current_instance_id = new_instance_id
-                print(f"Now monitoring instance {current_instance_id}")
+                info_print(f"Now monitoring instance {current_instance_id}")
 
-            print(f"DEBUG: Sleeping for 5 seconds...")
+            debug_print("Sleeping for 5 seconds...")
             time.sleep(5)
 
     except KeyboardInterrupt:
-        print("\nMonitoring stopped by user")
+        info_print("\nMonitoring stopped by user")
     except Exception as e:
-        print(f"Error: {e}")
+        info_print(f"Error: {e}")
         sys.exit(1)
 
 if __name__ == "__main__":
