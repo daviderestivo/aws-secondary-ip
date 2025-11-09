@@ -74,11 +74,9 @@ environments):
 }
 #+END_SRC
 
-** Route Table Configuration
+** VPC Route Table Configuration
 
-1. *Create Custom Route Tables*: One for each subnet that needs failover
-2. *Static Routes*: Add routes pointing to your secondary IP destinations
-3. *Associate*: Link route tables to appropriate subnets
+1. *Static Routes*: Add routes pointing to the ENI of the Instance ID
 
 Example route table entry:
 - *Destination*: 10.0.0.10/32
@@ -138,16 +136,30 @@ pip3 install boto3 jinja2
 
 * Network Architecture
 
+Before failover:
+
 #+BEGIN_EXAMPLE
-VPC (10.0.0.0/16)
-├── AZ-A Subnet (10.0.1.0/24)
-│   └── Instance A (Primary: 10.0.1.100, Secondary: 10.0.0.10)
-├── AZ-B Subnet (10.0.2.0/24)
-│   └── Instance B (Primary: 10.0.2.100, Secondary: 10.0.0.10)
+VPC (172.31.0.0/16)
+├── AZ-1 Subnet (172.31.48.0/20)
+│   └── Instance A (Primary: 172.31.32.48.10, Secondary: 10.0.0.10)
+├── AZ-2 Subnet (172.31.32.0/20)
+│   └── None
 └── Route Tables
-    ├── RT-1: 10.0.0.10/32 → Instance A
+    └── RT-1: 10.0.0.10/32 → Instance A
+#+END_EXAMPLE
+
+After failover:
+
+#+BEGIN_EXAMPLE
+VPC (172.31.0.0/16)
+├── AZ-1 Subnet (172.31.48.0/20)
+│   └── None
+├── AZ-2 Subnet (172.31.32.0/20)
+│   └── Instance A (Primary: 172.31.32.15, Secondary: 10.0.0.10)
+└── Route Tables
     └── RT-2: 10.0.0.10/32 → Instance B (after failover)
 #+END_EXAMPLE
+
 
 * Troubleshooting
 
