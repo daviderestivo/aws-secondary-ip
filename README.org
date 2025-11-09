@@ -219,7 +219,6 @@ VPC (172.31.0.0/16)
     └── RT-2: 10.0.0.10/32 → Instance B (after failover)
 #+END_EXAMPLE
 
-
 * Troubleshooting
 
 - *Permission Errors*: Verify IAM permissions and AWS credentials
