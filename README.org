@@ -20,13 +20,14 @@ instances when failures are detected.
 * Usage
 
 #+BEGIN_SRC bash
-python3 ec2_controller.py \
-  --instance-id i-1234567890abcdef0 \
-  --security-group sg-0123456789abcdef0 \
-  --keypair my-keypair \
-  --user-data-file userdata_template.sh \
-  --route-destination 10.0.0.10/32 \
-  [--debug]
+  export AWS_DEFAULT_REGION=us-east-1
+  python3 ec2_controller.py \
+    --instance-id i-1234567890abcdef0 \
+    --security-group sg-0123456789abcdef0 \
+    --keypair my-keypair \
+    --user-data-file userdata_template.sh \
+    --route-destination 10.0.0.10/32 \
+    [--debug]
 #+END_SRC
 
 ** Parameters
@@ -38,6 +39,48 @@ python3 ec2_controller.py \
 - =--route-destination=: CIDR block for static route (e.g., 10.0.0.10/32)
 - =--debug=: Enable verbose debug output (optional)
 
+* Monitoring Network Configuration
+
+Run the below commands on the Monitoring machine:
+
+#+BEGIN_SRC bash
+sudo tee /etc/rc.local <<'EOF'
+#!/bin/bash
+
+ip addr add 10.0.0.100/24 dev enX0
+
+mkdir -p /etc/iproute2
+echo "200 secondary" | sudo tee -a /etc/iproute2/rt_tables
+ip rule add to 10.0.0.0/24 table secondary
+ip route add default via 172.31.16.1 src 10.0.0.100 dev enX0 table secondary
+EOF
+
+sudo chmod +x /etc/rc.local
+#+END_SRC
+
+#+BEGIN_SRC bash
+sudo tee /etc/systemd/system/rc-local.service <<'EOF'
+[Unit]
+Description=/etc/rc.local Compatibility
+ConditionPathExists=/etc/rc.local
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=forking
+ExecStart=/etc/rc.local start
+TimeoutSec=0
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sudo systemctl daemon-reload
+sudo systemctl enable rc-local
+sudo systemctl start rc-local
+#+END_SRC
+
 * AWS Configuration Requirements
 
 ** Security Groups
@@ -46,11 +89,36 @@ Create a security group with:
 - *Inbound*: Allow required application ports and ICMP (for ping)
 - *Outbound*: Allow all traffic (0.0.0.0/0)
 
+Add the monitoring machine to the security group. This could be the
+same security group you specify in the script using the
+`--security-group` argument.
+
 ** IAM Permissions
 
 The script requires an IAM role/user to allow the monitoring machine
 to re-create an new machine (do not use it for non-productive
-environments):
+environments).
+
+In AWS Console:
+
+1. Go to IAM → Policies → Create policy
+2. Click "JSON" tab
+3. Paste the policy you provided
+4. Click "Next: Tags" (skip tags if not needed)
+5. Click "Next: Review"
+6. Enter policy name: EC2ControllerPolicy
+7. Click "Create policy"
+
+Attach to EC2 instance:
+
+1. Go to IAM → Roles → Create role
+2. Select "AWS service" → "EC2"
+3. Search and select your EC2ControllerPolicy
+4. Click "Next" → Enter role name: EC2ControllerRole
+5. Click "Create role"
+6. Go to EC2 → Select your controller instance
+7. Actions → Security → Modify IAM role
+8. Select EC2ControllerRole
 
 #+BEGIN_SRC json
 {
@@ -66,6 +134,8 @@ environments):
     ]
 }
 #+END_SRC
+
+Assign the EC2ControllerPolicy role to the Monitoring machine.
 
 ** Instance Configuration
 
