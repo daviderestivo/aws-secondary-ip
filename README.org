@@ -1,117 +1,157 @@
-* aws-secondary-ip
+#+TITLE: AWS EC2 Secondary IP Failover Controller
+#+AUTHOR: Davide Restivo
+#+DATE: [2025-11-09 Sun]
+#+OPTIONS: toc:t num:t
 
-** sec-ip-cl
-:PROPERTIES:
-:DATE:     [2025-11-08 Sat 17:11]
-:END:
+* Overview
 
-#+begin_src bash
-  sudo su -
+This script provides automatic failover for EC2 instances with
+secondary IP addresses across availability zones. It monitors an
+instance's health via ping and automatically launches replacement
+instances when failures are detected.
 
-  hostnamectl set-hostname sec-ip-cl
+* How It Works
 
-  dnf -y install emacs pip
+1. *Monitoring*: Continuously monitors a target EC2 instance by pinging a specified IP address
+2. *Health Check*: Verifies instance state (running) and network reachability
+3. *Failover*: When failure is detected, launches a new instance in a different AZ
+4. *Route Update*: Updates VPC route tables to redirect traffic to the new instance
+5. *Cleanup*: Terminates the failed instance and continues monitoring the replacement
 
-  ip addr add 10.0.0.100/24 dev enX0
+* Usage
 
-  mkdir -p /etc/iproute2
-  echo "200 secondary" | sudo tee -a /etc/iproute2/rt_tables
-  ip rule add to 10.0.0.0/24 table secondary
-  ip route add default via 172.31.16.1 src 10.0.0.100 dev enX0 table secondary
-#+end_src
+#+BEGIN_SRC bash
+python3 ec2_controller.py \
+  --instance-id i-1234567890abcdef0 \
+  --security-group sg-0123456789abcdef0 \
+  --keypair my-keypair \
+  --user-data-file userdata_template.sh \
+  --route-destination 10.0.0.10/32 \
+  [--debug]
+#+END_SRC
 
-*** rc.local config
-:PROPERTIES:
-:DATE:     [2025-11-08 Sat 17:55]
-:END:
+** Parameters
 
-#######
-sudo tee /etc/rc.local <<'EOF'
-#!/bin/bash
+- =--instance-id=: Initial EC2 instance ID to monitor
+- =--security-group=: Security group ID for new instances
+- =--keypair=: Key pair name for SSH access
+- =--user-data-file=: Path to Jinja2 template for instance configuration
+- =--route-destination=: CIDR block for static route (e.g., 10.0.0.10/32)
+- =--debug=: Enable verbose debug output (optional)
 
-ip addr add 10.0.0.100/24 dev enX0
+* AWS Configuration Requirements
 
-mkdir -p /etc/iproute2
-echo "200 secondary" | sudo tee -a /etc/iproute2/rt_tables
-ip rule add to 10.0.0.0/24 table secondary
-ip route add default via 172.31.16.1 src 10.0.0.100 dev enX0 table secondary
-EOF
+** VPC Setup
 
-sudo chmod +x /etc/rc.local
-#######
+- *Multi-AZ VPC*: VPC must span multiple availability zones
+- *Subnets*: At least one subnet in each AZ where failover is needed
+- *Route Tables*: Custom route tables for directing traffic to secondary IPs
 
-#######
-sudo tee /etc/systemd/system/rc-local.service <<'EOF'
-[Unit]
-Description=/etc/rc.local Compatibility
-ConditionPathExists=/etc/rc.local
-After=network-online.target
-Wants=network-online.target
+** Security Groups
 
-[Service]
-Type=forking
-ExecStart=/etc/rc.local start
-TimeoutSec=0
-RemainAfterExit=yes
+Create a security group with:
+- *Inbound*: Allow required application ports and ICMP (for ping)
+- *Outbound*: Allow all traffic (0.0.0.0/0)
 
-[Install]
-WantedBy=multi-user.target
-EOF
+** IAM Permissions
 
-sudo systemctl daemon-reload
-sudo systemctl enable rc-local
-sudo systemctl start rc-local
-####
+The script requires an IAM role/user to allow the monitoring machine
+to re-create an new machine (do not use it for non-productive
+environments):
 
-*** Controller
-:PROPERTIES:
-:DATE:     [2025-11-09 Sun 08:32]
-:END:
+#+BEGIN_SRC json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2:*"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+#+END_SRC
 
-#+begin_src bash
-  pip install boto3
-#+end_src
+** Route Table Configuration
 
+1. *Create Custom Route Tables*: One for each subnet that needs failover
+2. *Static Routes*: Add routes pointing to your secondary IP destinations
+3. *Associate*: Link route tables to appropriate subnets
 
-EC2 Policy
+Example route table entry:
+- *Destination*: 10.0.0.10/32
+- *Target*: Instance ID (i-1234567890abcdef0)
 
-In AWS Console:
+** Instance Configuration
 
-1. Go to IAM → Policies → Create policy
-2. Click "JSON" tab
-3. Paste the policy you provided
-4. Click "Next: Tags" (skip tags if not needed)
-5. Click "Next: Review"
-6. Enter policy name: EC2ControllerPolicy
-7. Click "Create policy"
+- *Source/Destination Check*: Disabled (script handles this automatically)
+- *Secondary IP*: Configured via user data script
+- *AMI*: Amazon Linux 2 or compatible Linux distribution
 
-Attach to EC2 instance:
+* User Data Template
 
-1. Go to IAM → Roles → Create role
-2. Select "AWS service" → "EC2"
-3. Search and select your EC2ControllerPolicy
-4. Click "Next" → Enter role name: EC2ControllerRole
-5. Click "Create role"
-6. Go to EC2 → Select your controller instance
-7. Actions → Security → Modify IAM role
-8. Select EC2ControllerRole
+The =userdata_template.sh= uses Jinja2 variables:
 
-#+begin_src json
-  {
-      "Version": "2012-10-17",
-      "Statement": [
-      	{
-      		"Effect": "Allow",
-      		"Action": [
-      			"ec2:*"
-      		],
-      		"Resource": "*"
-      	}
-      ]
-  }
-#+end_src
+- ={{AZ_SUBNET_DEF_ROUTE}}=: Default gateway for the subnet
+- ={{ROUTE_DESTINATION}}=: Secondary IP address to configure
 
-#+begin_src bash
-  export AWS_DEFAULT_REGION=us-east-1
-  python3 ec2_controller.py --instance-id i-03994d9f285e5566d --security-group sg-048094becb5548da7 --keypair 823999505270_sc-ps-training --user-data-file userdata_template.sh --route-destination 10.0.0.10 --debug
-#+end_src
+Example template configures:
+- Secondary IP address on primary interface
+- Custom routing table for secondary IP traffic
+- Systemd service for persistence across reboots
+
+* Monitoring Output
+
+** Normal Operation (without --debug)
+#+BEGIN_EXAMPLE
+[2024-11-09 16:15:30] Instance i-1234567890abcdef0 (10.0.1.100) in AZ us-east-1a - RUNNING, PING: REACHABLE
+#+END_EXAMPLE
+
+** Failover Event
+#+BEGIN_EXAMPLE
+[2024-11-09 16:15:35] Instance i-1234567890abcdef0 (10.0.1.100) in AZ us-east-1a - RUNNING, PING: UNREACHABLE
+[2024-11-09 16:15:35] Launching replacement due to: unreachable
+Launching new instance in AZ: us-east-1b
+New instance i-0987654321fedcba0 launched
+Waiting for instance status checks to pass...
+Instance status checks passed
+Waiting 30 seconds for user data script to configure secondary IP...
+Updating static routes...
+Added route 10.0.0.10/32 -> i-0987654321fedcba0 in route table rtb-0123456789abcdef0
+Old instance i-1234567890abcdef0 terminated
+Now monitoring instance i-0987654321fedcba0
+#+END_EXAMPLE
+
+* Dependencies
+
+- Python 3.6+
+- boto3
+- jinja2
+
+* Installation
+
+#+BEGIN_SRC bash
+pip3 install boto3 jinja2
+#+END_SRC
+
+* Network Architecture
+
+#+BEGIN_EXAMPLE
+VPC (10.0.0.0/16)
+├── AZ-A Subnet (10.0.1.0/24)
+│   └── Instance A (Primary: 10.0.1.100, Secondary: 10.0.0.10)
+├── AZ-B Subnet (10.0.2.0/24)
+│   └── Instance B (Primary: 10.0.2.100, Secondary: 10.0.0.10)
+└── Route Tables
+    ├── RT-1: 10.0.0.10/32 → Instance A
+    └── RT-2: 10.0.0.10/32 → Instance B (after failover)
+#+END_EXAMPLE
+
+* Troubleshooting
+
+- *Permission Errors*: Verify IAM permissions and AWS credentials
+- *Route Creation Fails*: Ensure CIDR format is correct (use /32 for single IPs)
+- *Instance Launch Fails*: Check security group, key pair, and subnet availability
+- *Ping Failures*: Verify security group allows ICMP and target IP is configured
