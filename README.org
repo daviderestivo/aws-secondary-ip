@@ -12,11 +12,10 @@ instances when failures are detected.
 
 * How It Works
 
-1. *Monitoring*: Continuously monitors a target EC2 instance by pinging a specified IP address
-2. *Health Check*: Verifies instance state (running) and network reachability
-3. *Failover*: When failure is detected, launches a new instance in a different AZ
-4. *Route Update*: Updates VPC route tables to redirect traffic to the new instance
-5. *Cleanup*: Terminates the failed instance and continues monitoring the replacement
+1. *Health Check*: Verifies instance state (running) and network reachability (ping)
+2. *Failover*: When failure is detected, launches a new instance in a different AZ
+3. *Route Update*: Updates VPC route tables to redirect traffic to the new instance
+4. *Cleanup*: Terminates the failed instance and continues monitoring the replacement one
 
 * Usage
 
@@ -40,12 +39,6 @@ python3 ec2_controller.py \
 - =--debug=: Enable verbose debug output (optional)
 
 * AWS Configuration Requirements
-
-** VPC Setup
-
-- *Multi-AZ VPC*: VPC must span multiple availability zones
-- *Subnets*: At least one subnet in each AZ where failover is needed
-- *Route Tables*: Custom route tables for directing traffic to secondary IPs
 
 ** Security Groups
 
@@ -74,19 +67,15 @@ environments):
 }
 #+END_SRC
 
-** VPC Route Table Configuration
-
-1. *Static Routes*: Add routes pointing to the ENI of the Instance ID
-
-Example route table entry:
-- *Destination*: 10.0.0.10/32
-- *Target*: Instance ID (i-1234567890abcdef0)
-
 ** Instance Configuration
 
 - *Source/Destination Check*: Disabled (script handles this automatically)
 - *Secondary IP*: Configured via user data script
 - *AMI*: Amazon Linux 2 or compatible Linux distribution
+- *Static Routes*: Add routes pointing to the ENI of the Instance ID (script handles this automatically)
+  Example route table entry:
+  - *Destination*: 10.0.0.10/32
+  - *Target*: Instance ID (i-1234567890abcdef0)
 
 * User Data Template
 
