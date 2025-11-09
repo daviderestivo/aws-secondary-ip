@@ -91,7 +91,7 @@ Create a security group with:
 
 Add the monitoring machine to the security group. This could be the
 same security group you specify in the script using the
-`--security-group` argument.
+=--security-group= argument.
 
 ** IAM Permissions
 
