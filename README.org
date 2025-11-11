@@ -98,7 +98,7 @@ same security group you specify in the script using the
 ** IAM Permissions
 
 The script requires an IAM role/user to allow the monitoring machine
-to re-create an new machine (do not use it for production environments).
+to re-create an new machine.
 
 In AWS Console:
 
@@ -137,6 +137,8 @@ Attach to EC2 instance:
 #+END_SRC
 
 Assign the EC2ControllerPolicy role to the Monitoring machine.
+
+*Warning*: The aboce IAM policy grants broad EC2 permissions (ec2:*) and is intended for testing purposes only. For production use, create a more restrictive policy with only the minimum required permissions.
 
 ** Instance Configuration
 
