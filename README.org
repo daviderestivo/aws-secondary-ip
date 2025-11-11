@@ -97,8 +97,7 @@ same security group you specify in the script using the
 
 ** IAM Permissions
 
-The script requires an IAM role/user to allow the monitoring machine
-to re-create an new machine.
+The script requires an IAM role to allow the monitoring machine to re-create an new machine.
 
 In AWS Console:
 
