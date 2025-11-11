@@ -109,17 +109,6 @@ In AWS Console:
 6. Enter policy name: EC2ControllerPolicy
 7. Click "Create policy"
 
-Attach to EC2 instance:
-
-1. Go to IAM → Roles → Create role
-2. Select "AWS service" → "EC2"
-3. Search and select your EC2ControllerPolicy
-4. Click "Next" → Enter role name: EC2ControllerRole
-5. Click "Create role"
-6. Go to EC2 → Select your controller instance
-7. Actions → Security → Modify IAM role
-8. Select EC2ControllerRole
-
 #+BEGIN_SRC json
 {
     "Version": "2012-10-17",
@@ -134,6 +123,17 @@ Attach to EC2 instance:
     ]
 }
 #+END_SRC
+
+Attach to EC2 instance:
+
+1. Go to IAM → Roles → Create role
+2. Select "AWS service" → "EC2"
+3. Search and select your EC2ControllerPolicy
+4. Click "Next" → Enter role name: EC2ControllerRole
+5. Click "Create role"
+6. Go to EC2 → Select your controller instance
+7. Actions → Security → Modify IAM role
+8. Select EC2ControllerRole
 
 Assign the EC2ControllerPolicy role to the Monitoring machine.
 
